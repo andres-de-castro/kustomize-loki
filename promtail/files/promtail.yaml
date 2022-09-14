@@ -28,6 +28,8 @@ scrape_configs:
     kubernetes_sd_configs:
       - role: pod
     relabel_configs:
+      - action: labeldrop
+        regex: 'filename'
       - action: replace
         source_labels:
           - __meta_kubernetes_pod_label_app_kubernetes_io_name
@@ -102,6 +104,8 @@ scrape_configs:
       - role: pod
     relabel_configs:
       # Drop pods with label 'app.kubernetes.io/name'. They are already considered above
+      - action: labeldrop
+        regex: 'filename' 
       - action: drop
         regex: .+
         source_labels:
@@ -166,6 +170,8 @@ scrape_configs:
       - role: pod
     relabel_configs:
       # Drop pods with label 'app.kubernetes.io/name' or 'app'. They are already considered above
+      - action: labeldrop
+        regex: 'filename'       
       - action: drop
         regex: .+
         separator: ''
@@ -234,6 +240,8 @@ scrape_configs:
       - role: pod
     relabel_configs:
       # Drop pods with label 'app.kubernetes.io/name' or 'app'. They are already considered above
+      - action: labeldrop
+        regex: 'filename'       
       - action: drop
         regex: .+
         separator: ''
@@ -296,6 +304,8 @@ scrape_configs:
       - role: pod
     relabel_configs:
       # Drop what has already been covered
+      - action: labeldrop
+        regex: 'filename'      
       - action: drop
         regex: .+
         separator: ''
